@@ -1,0 +1,23 @@
+### Ide ###
+
+.idea
+.idea/*
+
+### Python ###
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+### Misc ###
+wheels/
+*.egg-info/
+db.sqlite3
+
+### Env ###
+.env/
+.venv/
+env/
+venv/
+ENV/
+pythonenv*
