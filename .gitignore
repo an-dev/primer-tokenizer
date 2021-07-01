@@ -1,6 +1,7 @@
 ### Ide ###
 
 .idea
+.idea/*
 .vscode
 
 ### Python ###
