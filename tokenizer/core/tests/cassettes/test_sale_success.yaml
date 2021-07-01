@@ -1,0 +1,114 @@
+interactions:
+- request:
+    body: amount=24500&currency=usd&description=Just+your+average+description+for+a+charge&source=tok_1J8C9w2eZvKYlo2CMhHS7Ug9
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer sk_test_4eC39HqLyjWDarjtT1zdp7dc
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '116'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Idempotency-Key:
+      - 072a9779-43c5-41c5-8ee5-7996e758333e
+      User-Agent:
+      - Stripe/v1 PythonBindings/2.58.0
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics": {"request_id": "req_66yL6CXfxKj2wj", "request_duration_ms":
+        99}}'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version": "2.58.0", "lang": "python", "publisher": "stripe", "httplib":
+        "requests", "lang_version": "3.7.5", "platform": "Linux-4.15.0-142-generic-x86_64-with-debian-stretch-sid",
+        "uname": "Linux andev 4.15.0-142-generic #146~16.04.1-Ubuntu SMP Tue Apr 13
+        09:27:15 UTC 2021 x86_64 x86_64"}'
+    method: POST
+    uri: https://api.stripe.com/v1/charges
+  response:
+    body:
+      string: "{\n  \"id\": \"ch_1J8CA92eZvKYlo2CLpvXjCSY\",\n  \"object\": \"charge\",\n
+        \ \"amount\": 24500,\n  \"amount_captured\": 24500,\n  \"amount_refunded\":
+        0,\n  \"application\": null,\n  \"application_fee\": null,\n  \"application_fee_amount\":
+        null,\n  \"balance_transaction\": \"txn_1J8CA92eZvKYlo2CxSX4hpn8\",\n  \"billing_details\":
+        {\n    \"address\": {\n      \"city\": null,\n      \"country\": null,\n      \"line1\":
+        null,\n      \"line2\": null,\n      \"postal_code\": null,\n      \"state\":
+        null\n    },\n    \"email\": null,\n    \"name\": null,\n    \"phone\": null\n
+        \ },\n  \"calculated_statement_descriptor\": \"STRIPE.COM\",\n  \"captured\":
+        true,\n  \"created\": 1625093145,\n  \"currency\": \"usd\",\n  \"customer\":
+        null,\n  \"description\": \"Just your average description for a charge\",\n
+        \ \"destination\": null,\n  \"dispute\": null,\n  \"disputed\": false,\n  \"failure_code\":
+        null,\n  \"failure_message\": null,\n  \"fraud_details\": {\n  },\n  \"invoice\":
+        null,\n  \"livemode\": false,\n  \"metadata\": {\n  },\n  \"on_behalf_of\":
+        null,\n  \"order\": null,\n  \"outcome\": {\n    \"network_status\": \"approved_by_network\",\n
+        \   \"reason\": null,\n    \"risk_level\": \"normal\",\n    \"risk_score\":
+        18,\n    \"seller_message\": \"Payment complete.\",\n    \"type\": \"authorized\"\n
+        \ },\n  \"paid\": true,\n  \"payment_intent\": null,\n  \"payment_method\":
+        \"card_1J8C9w2eZvKYlo2CcQROEzcL\",\n  \"payment_method_details\": {\n    \"card\":
+        {\n      \"brand\": \"visa\",\n      \"checks\": {\n        \"address_line1_check\":
+        null,\n        \"address_postal_code_check\": null,\n        \"cvc_check\":
+        null\n      },\n      \"country\": \"US\",\n      \"exp_month\": 10,\n      \"exp_year\":
+        2021,\n      \"fingerprint\": \"Xt5EWLLDS7FJjR1c\",\n      \"funding\": \"credit\",\n
+        \     \"installments\": null,\n      \"last4\": \"4242\",\n      \"network\":
+        \"visa\",\n      \"three_d_secure\": null,\n      \"wallet\": null\n    },\n
+        \   \"type\": \"card\"\n  },\n  \"receipt_email\": null,\n  \"receipt_number\":
+        null,\n  \"receipt_url\": \"https://pay.stripe.com/receipts/acct_1032D82eZvKYlo2C/ch_1J8CA92eZvKYlo2CLpvXjCSY/rcpt_JljdjRSbcsSxFaEKCNeBm7ijYhqa9Nj\",\n
+        \ \"refunded\": false,\n  \"refunds\": {\n    \"object\": \"list\",\n    \"data\":
+        [\n\n    ],\n    \"has_more\": false,\n    \"total_count\": 0,\n    \"url\":
+        \"/v1/charges/ch_1J8CA92eZvKYlo2CLpvXjCSY/refunds\"\n  },\n  \"review\": null,\n
+        \ \"shipping\": null,\n  \"source\": {\n    \"id\": \"card_1J8C9w2eZvKYlo2CcQROEzcL\",\n
+        \   \"object\": \"card\",\n    \"address_city\": null,\n    \"address_country\":
+        null,\n    \"address_line1\": null,\n    \"address_line1_check\": null,\n
+        \   \"address_line2\": null,\n    \"address_state\": null,\n    \"address_zip\":
+        null,\n    \"address_zip_check\": null,\n    \"brand\": \"Visa\",\n    \"country\":
+        \"US\",\n    \"customer\": null,\n    \"cvc_check\": null,\n    \"dynamic_last4\":
+        null,\n    \"exp_month\": 10,\n    \"exp_year\": 2021,\n    \"fingerprint\":
+        \"Xt5EWLLDS7FJjR1c\",\n    \"funding\": \"credit\",\n    \"last4\": \"4242\",\n
+        \   \"metadata\": {\n    },\n    \"name\": null,\n    \"tokenization_method\":
+        null\n  },\n  \"source_transfer\": null,\n  \"statement_descriptor\": null,\n
+        \ \"statement_descriptor_suffix\": null,\n  \"status\": \"succeeded\",\n  \"transfer_data\":
+        null,\n  \"transfer_group\": null\n}\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2970'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 30 Jun 2021 22:45:45 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+      access-control-allow-credentials:
+      - 'true'
+      access-control-allow-methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      access-control-allow-origin:
+      - '*'
+      access-control-expose-headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      access-control-max-age:
+      - '300'
+      cache-control:
+      - no-cache, no-store
+      idempotency-key:
+      - 072a9779-43c5-41c5-8ee5-7996e758333e
+      original-request:
+      - req_F8foMxzEPE7TiO
+      request-id:
+      - req_F8foMxzEPE7TiO
+      stripe-should-retry:
+      - 'false'
+      stripe-version:
+      - '2019-02-19'
+      x-stripe-c-cost:
+      - '9'
+    status:
+      code: 200
+      message: OK
+version: 1
