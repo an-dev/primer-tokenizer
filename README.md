@@ -51,7 +51,7 @@ curl --request POST \
   --url https://localhost:8000/api/sale/ \
   --header 'Content-Type: application/json' \
   --data '{
-        "token": "tok_1J8CCj2eZvKYlo2CPdo9cHi9",
+        "token": "tok_xxxxxx",
         "amount": 45000,
         "description": "Just your average description for a charge",
         "currency": "usd"
