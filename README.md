@@ -23,6 +23,8 @@ Test via django built in command: `python manage.py test`
 **Note**: If you use `primer-token.herokuapp.com` as a host, beware that the heroku puts the server to sleep after 
 30 minutes of inactivity, and your first call might timeout as the workers are being turned on.
 
+The project was developed with Stripe, use any of the of their sandbox cards https://stripe.com/docs/testing#cards
+
 ### Tokenize credit card
 Request
 ```
