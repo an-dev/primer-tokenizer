@@ -3,12 +3,16 @@
 Quick task implementation
 
 
+## Requirements
+Python 3.7+ is required to run the application (using dataclasses and other nice-to-have python scaffolding)
+
+
 ## Installation
-- To install, clone the repository locally: `git clone `
-- Create virtualenv: `python3 -m venv .venv`
+- To install, clone the repository locally: `git clone https://github.com/an-dev/primer-tokenizer`
+- Create virtualenv: `python3.8 -m venv .venv`
 - Activate virtualenv: `source .venv/bin/activate`
 - Install dependencies: `pip install -r requirements.txt`
-- Migrate and load data from dump `python manage.py migrate && python manage.py loaddata dump.json`
+- Migrate data/setup db `python manage.py migrate`
 
 
 ## Testing
@@ -16,60 +20,65 @@ Test via django built in command: `python manage.py test`
 
 ## Usage
 
-### create restaurants with a restaurant name
+**Note**: If you use `primer-token.herokuapp.com` as a host, beware that the heroku puts the server to sleep after 
+30 minutes of inactivity, and your first call might timeout as the workers are being turned on.
+
+### Tokenize credit card
+Request
 ```
 curl --request POST \
-  --url http://localhost:8000/api/restaurants/ \
+  --url http://localhost:8000/api/tokenize/ \
   --header 'Content-Type: application/json' \
-  --cookie csrftoken=ie7XqnpyEKTHkY6ldoQMncBf6bK7J66m2HfHovNJX3L7ZUCbQiH9w7WT0mtpE80R \
   --data '{
-	"name": "Bestest Fish n Chips"
+        "number": "4242424242424242",
+        "expiry_month": 10,
+        "expiry_year": 2021
     }'
 ```
 
-### view all restaurants with pagination
+Successful Response
 ```
-curl --request GET \
-  --url http://localhost:8000/api/restaurants/ \
-  --header 'Content-Type: application/json' \
-  --cookie csrftoken=ie7XqnpyEKTHkY6ldoQMncBf6bK7J66m2HfHovNJX3L7ZUCbQiH9w7WT0mtpE80R
+{
+    "token": "tok_xxxxxx"
+}
+
 ```
 
-### add a name & email address to a waitlist for a specific restaurant
+### Execute sale with token (obtained from API call above)
+Request
 ```
 curl --request POST \
-  --url http://localhost:8000/api/restaurants/2/waitlist/ \
+  --url https://localhost:8000/api/sale/ \
   --header 'Content-Type: application/json' \
-  --cookie csrftoken=ie7XqnpyEKTHkY6ldoQMncBf6bK7J66m2HfHovNJX3L7ZUCbQiH9w7WT0mtpE80R \
   --data '{
-	"name":"Andy",
-	"email":"yeahthebest92@hotmail.it"
+        "token": "tok_xxxxxx",
+        "amount": 45000,
+        "description": "Just your average description for a charge",
+        "currency": "usd"
     }'
 ```
 
-### remove an entry for a specific email address from a waitlist for a specific restaurant
+Successful Response
 ```
-curl --request POST \
-  --url http://localhost:8000/api/restaurants/2/waitlist/entry/ \
-  --header 'Content-Type: application/json' \
-  --cookie csrftoken=ie7XqnpyEKTHkY6ldoQMncBf6bK7J66m2HfHovNJX3L7ZUCbQiH9w7WT0mtpE80R \
-  --data '{
-	"email":"yeahthebest92@hotmail.it"
-    }'
+{
+    "receipt_url": "https://pay.stripe.com/receipts/acct_xxxxx/ch_yyyyyyy/rcpt_zzzzz", # You can view the transaction/receipt here btw
+    "transaction_id": "txn_xxxxx"
+}
 ```
 
-### view a waitlist for a restaurant
-```
-curl --request GET \
-  --url http://localhost:8000/api/restaurants/2/waitlist/ \
-  --header 'Content-Type: application/json' \
-  --cookie csrftoken=ie7XqnpyEKTHkY6ldoQMncBf6bK7J66m2HfHovNJX3L7ZUCbQiH9w7WT0mtpE80R
+## Notes, Technical decisions et all
 
-```
+#### Choice of connector
+The project is heavily influenced by Stripe, as it was used as main/default choice as a connector, but it opens to possibility of implementing other connectors. 
 
-## Notes
-TODO
+#### Enpoint Authorization/Authentication
+If this was a publicly exposed API some sort of Authorization would be needed for a potential developer (along with other safeguards like rate limiting etc...)
 
+#### Testing and logging
+A minimalistic approach to testing was taken, using cassettes to speed up tests that may require external API calls to speed up test cases.
+Potentially more comprehensive tests would be written (on the connectors for example).
+
+As for logging and exception handling, common or expected errors are catched while leaving unexpected events bubble up (in a production environment we'd be notified about these with a `Sentry`-like system)
 
 
 ## References
@@ -78,3 +87,5 @@ Web pages used/consulted while building the script
 https://www.django-rest-framework.org/api-guide/viewsets/#modelviewset
 
 https://www.django-rest-framework.org/api-guide/testing/#testing
+
+https://stackoverflow.com/questions/31685688/is-allowed-hosts-needed-on-heroku
