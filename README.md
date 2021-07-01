@@ -68,8 +68,19 @@ Successful Response
 
 ## Notes, Technical decisions et all
 
-#### Choice of connector
-The project is heavily influenced by Stripe, as it was used as main/default choice as a connector, but it opens to possibility of implementing other connectors. 
+#### Choice of processor/connector
+The project is heavily influenced by Stripe, as it was used as main/default choice as a connector, but it opens to possibility of implementing other connectors.
+
+#### Data storage 
+The project doesn't store any Customer/Card information, as it wasn't one of the explicit features requested by the task but this would be easily implementable.
+
+`customer 1 -> n card`
+
+`card 1 -> n tokens (single use)`
+
+In the above scenario a "returning" user/card details would no create a new card but return:
+- a non used token related to the card details inserted
+- a new token
 
 #### Enpoint Authorization/Authentication
 If this was a publicly exposed API some sort of Authorization would be needed for a potential developer (along with other safeguards like rate limiting etc...)
